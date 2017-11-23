@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <unistd.h>
 
-
+#include "testobject.h"
 #include <vlc/vlc.h>
 int main(int argc, char *argv[])
 {
