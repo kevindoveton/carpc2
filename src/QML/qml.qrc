@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>main.qml</file>
+        <file>Apps/Maps/Maps.qml</file>
+        <file>Apps/Music/Music.qml</file>
+        <file>Apps/Phone/Phone.qml</file>
+        <file>Menu/Header.qml</file>
+        <file>Menu/MainMenu.qml</file>
+        <file>Utilities/Sidebar.qml</file>
+        <file>Utilities/VerticalLine.qml</file>
+    </qresource>
+</RCC>

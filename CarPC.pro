@@ -3,10 +3,11 @@ QT += qml quick location
 CONFIG += c++11
 
 SOURCES += src/main.cpp \
-    src/testobject.cpp
+    src/CPP/Music/music.cpp \
+    src/CPP/SystemVolume/systemvolume.cpp
 RESOURCES += \
-    src/qml.qrc \
-    resources/resources.qrc
+    resources/resources.qrc \
+    src/QML/qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -47,8 +48,18 @@ DISTFILES += \
     resources/icons/music.png \
     resources/icons/phone.png \
     src/AppStack.qml \
-    src/MainMenu.qml
-
+    src/MainMenu.qml \
+    src/QML/qtquickcontrols2.conf \
+    src/QML/Apps/Maps/Maps.qml \
+    src/QML/Apps/Music/Music.qml \
+    src/QML/Apps/Phone/Phone.qml \
+    src/QML/Menu/Header.qml \
+    src/QML/Menu/MainMenu.qml \
+    src/QML/Menu/MenuModel.qml \
+    src/QML/Utilities/AppStack.qml \
+    src/QML/Utilities/Sidebar.qml \
+    src/QML/Utilities/VerticalLine.qml \
+    src/QML/main.qml
 
 
 
@@ -59,4 +70,8 @@ INCLUDEPATH += $$PWD/lib/vlc
 DEPENDPATH += $$PWD/lib/vlc
 
 HEADERS += \
-    src/testobject.h
+    src/CPP/Music/music.h \
+    src/CPP/SystemVolume/systemvolume.h
+
+unix: CONFIG += link_pkgconfig
+unix: PKGCONFIG += alsa

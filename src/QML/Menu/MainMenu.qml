@@ -9,32 +9,32 @@ Rectangle {
         ListElement {
             name: "Music"
             icon: "qrc:/icons/music.png"
-            link: "Music.qml"
+            link: "../Apps/Music/Music.qml"
         }
         ListElement {
             name: "Maps"
             icon: "qrc:/icons/maps.png"
-            link: "Maps.qml"
+            link: "../Apps/Maps/Maps.qml"
         }
         ListElement {
             name: "Contacts"
             icon: "qrc:/icons/contacts.png"
-            link: "Contacts.qml"
+            link: "../Apps/Contacts/Contacts.qml"
         }
         ListElement {
             name: "Messages"
             icon: "qrc:/icons/messages.png"
-            link: "Messaages.qml"
+            link: "../Apps/Messages/Messaages.qml"
         }
         ListElement {
             name: "Phone"
             icon: "qrc:/icons/phone.png"
-            link: "Phone.qml"
+            link: "../Apps/Phone/Phone.qml"
         }
         ListElement {
             name: "Airplay"
             icon: "qrc:/icons/music.png"
-            link: "Music.qml"
+            link: "../Apps/Airplay/Airplay.qml"
         }
     }
 
@@ -72,10 +72,6 @@ Rectangle {
                     text: name
                 }
             }
-
-
-
-
         }
     }
 

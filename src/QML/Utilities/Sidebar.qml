@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
-
+import com.kdoveton.carpc.SystemVolume 1.0
 Item {
     width: 50
     height: parent.height
@@ -9,6 +9,10 @@ Item {
         height: parent.height
         width: 1
         color: "blue"
+    }
+
+    SystemVolume {
+        id: systemVolume
     }
 
     ColumnLayout {
@@ -20,10 +24,13 @@ Item {
             height: 50
             width: 50
             radius: 5
-            color: "#0000b0"
+            color: "#333333"
             MouseArea {
                 anchors.fill: parent
-                onClicked: appStack.push(Qt.resolvedUrl("Maps.qml"))
+                onClicked: {
+                    systemVolume.decreaseVolume();
+                    console.warn(systemVolume.decreaseVolume());
+                }
             }
         }
 
