@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
-import com.kdoveton.carpc.SystemVolume 1.0
+
 Item {
     width: 50
     height: parent.height
@@ -9,10 +9,6 @@ Item {
         height: parent.height
         width: 1
         color: "blue"
-    }
-
-    SystemVolume {
-        id: systemVolume
     }
 
     ColumnLayout {
@@ -28,8 +24,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    systemVolume.decreaseVolume();
-                    console.warn(systemVolume.decreaseVolume());
+                    console.warn(JSON.stringify(music.artists));
                 }
             }
         }

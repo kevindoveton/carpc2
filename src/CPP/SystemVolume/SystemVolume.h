@@ -20,7 +20,6 @@ public:
     Q_INVOKABLE unsigned int increaseVolume();
     Q_INVOKABLE unsigned int decreaseVolume();
 
-
 protected:
     const float _VOLUMECHANGE = 5;
     void _setMasterVolume(long volume);
@@ -30,6 +29,7 @@ protected:
 
 signals:
     void volumeChanged();
+
 public slots:
 };
 

@@ -4,6 +4,9 @@ import QtQuick.Controls 2.1
 
 Item {
     clip: true
+
+
+
     SwipeView {
         id: musicSwipeView
         currentIndex: 1
@@ -12,31 +15,55 @@ Item {
         Item {
             id: musicPlaylist
             Rectangle {
-                color: 'red'
+                color: 'white   '
                 anchors.fill: parent
             }
         }
         Item {
             id: musicArtist
             Rectangle {
-                color: 'blue'
+                color: 'white'
                 anchors.fill: parent
+                GridView {
+                    cellWidth: parent.width /3
+                    cellHeight: parent.height /3
+                    anchors.fill: parent
+                    model: music.artists
+                    delegate: MusicArtistComponent { }
+                    interactive: true
+                }
             }
+
+
         }
 
         Item {
             id: musicAlbum
             Rectangle {
-                color: 'blue'
+                color: 'white'
                 anchors.fill: parent
+                GridView {
+                    cellWidth: parent.width /3
+                    cellHeight: parent.height /3
+                    anchors.fill: parent
+                    model: music.albums
+                    delegate: MusicAlbumComponent { }
+                    interactive: true
+                }
             }
         }
 
         Item {
             id: musicSong
             Rectangle {
-                color: 'blue'
+                color: 'white'
                 anchors.fill: parent
+                ListView {
+                    anchors.fill: parent
+                    model: music.songs
+                    delegate: MusicSongComponent { }
+                    interactive: true
+                }
             }
         }
     }
@@ -50,5 +77,7 @@ Item {
         anchors.bottom: musicSwipeView.bottom
         anchors.horizontalCenter: parent.horizontalCenter
     }
+
+
 }
 

@@ -1,19 +1,23 @@
-QT += qml quick location
+QT += qml quick location sql core
 
 CONFIG += c++11
 
 SOURCES += src/main.cpp \
-    src/CPP/Music/music.cpp \
-    src/CPP/SystemVolume/systemvolume.cpp
+    src/CPP/Music/MusicAlbum.cpp \
+    src/CPP/Music/Music.cpp \
+    src/CPP/Music/Player.cpp \
+    src/CPP/Music/MusicArtist.cpp \
+    src/CPP/SystemVolume/SystemVolume.cpp \
+    src/CPP/Music/MusicSong.cpp
 RESOURCES += \
     resources/resources.qrc \
     src/QML/qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+#QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH =
+#QML_DESIGNER_IMPORT_PATH =
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -56,22 +60,22 @@ DISTFILES += \
     src/QML/Menu/Header.qml \
     src/QML/Menu/MainMenu.qml \
     src/QML/Menu/MenuModel.qml \
-    src/QML/Utilities/AppStack.qml \
     src/QML/Utilities/Sidebar.qml \
     src/QML/Utilities/VerticalLine.qml \
-    src/QML/main.qml
-
-
-
-
-macx: LIBS += -L$$PWD/lib/vlc/lib/ -lvlc
-
-INCLUDEPATH += $$PWD/lib/vlc
-DEPENDPATH += $$PWD/lib/vlc
+    src/QML/main.qml \
+    src/QML/Utilities/Classes.qml \
+    src/QML/Apps/Music/MusicArtistComponent.qml \
+    src/QML/Apps/Music/MusicAlbumComponent.qml \
+    src/QML/Apps/Music/MusicSongComponent.qml
 
 HEADERS += \
-    src/CPP/Music/music.h \
-    src/CPP/SystemVolume/systemvolume.h
+    src/CPP/Music/MusicAlbum.h \
+    src/CPP/Music/Music.h \
+    src/CPP/Music/MusicArtist.h \
+    src/CPP/Music/Player.h \
+    src/CPP/SystemVolume/SystemVolume.h \
+    src/CPP/Music/MusicSong.h
 
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += alsa
+unix: PKGCONFIG += libvlc

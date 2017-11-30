@@ -8,5 +8,10 @@
         <file>Menu/MainMenu.qml</file>
         <file>Utilities/Sidebar.qml</file>
         <file>Utilities/VerticalLine.qml</file>
+        <file>Utilities/Classes.qml</file>
+        <file>Apps/Music/MusicSongComponent.qml</file>
+        <file>Apps/Music/MusicAlbumComponent.qml</file>
+        <file>Apps/Music/MusicArtistComponent.qml</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

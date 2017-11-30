@@ -1,4 +1,4 @@
-#include "systemvolume.h"
+#include "SystemVolume.h"
 
 SystemVolume::SystemVolume(QObject *parent) : QObject(parent) {
 }
