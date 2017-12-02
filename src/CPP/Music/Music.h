@@ -26,6 +26,8 @@ class Music : public QObject
     Q_PROPERTY(QList<QObject*> albums READ albums NOTIFY albumsChanged)
     Q_PROPERTY(QList<QObject*> songs READ songs NOTIFY songsChanged)
 
+//    Q_PROPERTY(QObject nowPlayingArtist READ nowPlayingArtist WRITE setNowPlayingArtist NOTIFY nowPlayingArtistChanged)
+
 
 
 public:
@@ -34,6 +36,15 @@ public:
     QList<QObject*> albums() { return _albums; }
     QList<QObject*> songs() { return _songs; }
 
+    Q_INVOKABLE QObject* getCurrentArtist();
+    Q_INVOKABLE QObject* getCurrentAlbum();
+    Q_INVOKABLE QObject* getCurrentSong();
+
+    Q_INVOKABLE QObject* getArtistById(unsigned int id);
+    Q_INVOKABLE QObject* getAlbumById(unsigned int id);
+    Q_INVOKABLE QObject* getSongById(unsigned int id);
+
+
     unsigned int currentArtist() { return _currentArtist; }
     unsigned int currentAlbum() { return _currentSong; }
     unsigned int currentSong() { return _currentSong; }
@@ -41,6 +52,10 @@ public:
     void setCurrentArtist(unsigned int artistId);
     void setCurrentAlbum(unsigned int albumId);
     void setCurrentSong(unsigned int songId);
+
+//    QObject nowPlayingArtist() { return _nowPlayingArtist; }
+//    QObject nowPlayingAlbum() { return _nowPlayingAlbum; }
+//    QObject nowPlayingSong() { return _nowPlayingSong; }
 
 
 protected:
@@ -57,6 +72,10 @@ protected:
     QSqlDatabase _db;
     QString dbPath;
 
+    QHash<QString, QObject*> _nowPlaying;
+
+    QObject _nowPlayingArtist;
+
 signals:
     void currentArtistChanged();
     void currentAlbumChanged();
@@ -66,7 +85,10 @@ signals:
     void albumsChanged();
     void songsChanged();
 
+    void nowPlayingChanged();
+
 public slots:
+    void updateNowPlaying();
 };
 
 #endif // MUSIC_H

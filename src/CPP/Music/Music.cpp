@@ -12,6 +12,9 @@ Music::Music(QObject *parent) : QObject(parent) {
   }
 
   getAllArtists();
+
+  QObject::connect(this, SIGNAL(currentSongChanged()), this, SLOT(updateNowPlaying()));
+
   return;
 }
 
@@ -36,7 +39,9 @@ void Music :: setCurrentArtist(unsigned int artistId) {
   _currentArtist = artistId;
   qDeleteAll(_albums);
   _albums.clear();
-  qDebug() << "Current artist: " << _currentArtist;
+
+  qDebug() << "Music :: setCurrentArtist()"
+           << "Current artist: " << _currentArtist;
 
   QSqlQuery query;
   query.prepare("SELECT * FROM albums WHERE artistId = (:artistId)");
@@ -55,11 +60,13 @@ void Music :: setCurrentArtist(unsigned int artistId) {
       unsigned int year = query.value(idYear).toInt();
       QString imagePath = query.value(idImagePath).toString();
       int artistId = query.value(idArtistId).toInt();
-      qDebug() << "added album: " << id << "name: " << name;
+      qDebug() << "Music :: setCurrentArtist()"
+               << "added album: " << id << "name: " << name;
       _albums.append(new MusicAlbum(id, name, genre, year, imagePath, artistId));
     }
   } else {
-    qWarning() << "setCurrentArtist(), Failed to exec query, " << query.lastError();
+    qWarning() << "Music :: setCurrentArtist()"
+               << "Failed to exec query, " << query.lastError();
   }
 
   emit albumsChanged();
@@ -76,30 +83,34 @@ void Music :: setCurrentAlbum(unsigned int albumId) {
   qDeleteAll(_songs);
   _songs.clear();
 
-  qDebug() << "Current album: " << _currentAlbum;
+ qDebug() << "Music :: setCurrentAlbum"
+          << "Current album: " << _currentAlbum;
 
   QSqlQuery query;
   query.prepare("SELECT * from songs as s \
                 INNER JOIN library as l on s.songId = l.songID \
                 where s.albumId = (:albumId)");
   query.bindValue(":albumId", albumId);
+
   if (query.exec()) {
     int idSongId = query.record().indexOf("songId");;
     int idName = query.record().indexOf("songName");
     int idPath = query.record().indexOf("path");;
     int idAlbumId = query.record().indexOf("albumId");
-    int idArtistId = query.record().indexOf("artistId");;
+//    int idArtistId = query.record().indexOf("artistId");
     while (query.next()) {
       unsigned int id = query.value(idSongId).toInt();
       QString name = query.value(idName).toString();
       QString path = query.value(idPath).toString();
       unsigned int albumId = query.value(idAlbumId).toInt();
-      unsigned int artistId = query.value(idArtistId).toInt();
-      qDebug() << "added song: " << id << "name: " << name;
-      _songs.append(new MusicSong(id, name, path, albumId, artistId));
+//      unsigned int artistId = query.value(idArtistId).toInt();
+      qDebug() << "Music :: setCurrentAlbum"
+               << "added song: " << id << "name: " << name;
+      _songs.append(new MusicSong(id, name, path, albumId, 0));
     }
   } else {
-    qWarning() << "setCurrentAlbum(), Failed to exec query, " << query.lastError();
+    qWarning() << "Music :: setCurrentAlbum()"
+               << "Failed to exec query," << query.lastError();
   }
 
   emit songsChanged();
@@ -109,7 +120,71 @@ void Music :: setCurrentAlbum(unsigned int albumId) {
 
 void Music :: setCurrentSong(unsigned int songId){
   _currentSong = songId;
-  qDebug() << "Current song: " << _currentSong;
+  qDebug() << "Music :: setCurrentSong"
+           << "Current song: " << _currentSong;
   emit currentSongChanged();
+  return;
+}
+
+QObject* Music :: getCurrentArtist() {
+  return getArtistById(_currentArtist);
+}
+
+QObject* Music :: getCurrentAlbum() {
+  return getAlbumById(_currentAlbum);
+}
+
+QObject* Music :: getCurrentSong() {
+  return getSongById(_currentSong);
+}
+
+QObject* Music :: getArtistById(unsigned int id) {
+  if (_currentArtist == NULL) {
+    qDebug() << "Music :: getArtistById"
+             << "unable to return artist, none selected";
+    return NULL;
+  }
+
+  for (int i = 0; i < _artists.count(); i++) {
+    MusicArtist* n = dynamic_cast<MusicArtist*>(_artists[i]);
+    if (n->id() == id) return _artists[i];
+  }
+
+  return NULL;
+}
+
+QObject* Music :: getAlbumById(unsigned int id) {
+  if (_currentAlbum == NULL) {
+    qDebug() << "Music :: getAlbumById"
+             << "unable to return artist, none selected";
+    return NULL;
+  }
+
+  for (int i = 0; i < _albums.count(); i++) {
+    MusicAlbum* n = dynamic_cast<MusicAlbum*>(_albums[i]);
+    if (n->id() == id) return _albums[i];
+  }
+
+  return NULL;
+}
+
+QObject* Music :: getSongById(unsigned int id) {
+  if (_currentSong == NULL) {
+    qDebug() << "Music :: getSongById"
+             << "unable to return artist, none selected";
+    return NULL;
+  }
+
+  for (int i = 0; i < _songs.count(); i++) {
+    MusicSong* n = dynamic_cast<MusicSong*>(_songs[i]);
+    if (n->id() == id) return _songs[i];
+  }
+
+  return NULL;
+}
+
+void Music :: updateNowPlaying() {
+
+  emit nowPlayingChanged();
   return;
 }

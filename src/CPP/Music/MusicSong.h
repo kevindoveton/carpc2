@@ -11,8 +11,7 @@ class MusicSong : public QObject {
 
   public:
     explicit MusicSong(unsigned int id, QString name, QString path,
-                       unsigned int albumId, unsigned int artistId,
-                       QObject *parent = nullptr);
+                       unsigned int albumId, QObject *parent = nullptr);
     unsigned int id() { return _id; }
     QString name() { return _name; }
     QUrl path() { return _path; }

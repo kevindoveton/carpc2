@@ -66,7 +66,8 @@ DISTFILES += \
     src/QML/Utilities/Classes.qml \
     src/QML/Apps/Music/MusicArtistComponent.qml \
     src/QML/Apps/Music/MusicAlbumComponent.qml \
-    src/QML/Apps/Music/MusicSongComponent.qml
+    src/QML/Apps/Music/MusicSongComponent.qml \
+    src/QML/Apps/Music/NowPlaying.qml
 
 HEADERS += \
     src/CPP/Music/MusicAlbum.h \

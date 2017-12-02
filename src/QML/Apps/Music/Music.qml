@@ -5,8 +5,6 @@ import QtQuick.Controls 2.1
 Item {
     clip: true
 
-
-
     SwipeView {
         id: musicSwipeView
         currentIndex: 1

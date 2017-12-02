@@ -12,6 +12,6 @@
         <file>Apps/Music/MusicSongComponent.qml</file>
         <file>Apps/Music/MusicAlbumComponent.qml</file>
         <file>Apps/Music/MusicArtistComponent.qml</file>
+        <file>Apps/Music/NowPlaying.qml</file>
     </qresource>
-    <qresource prefix="/"/>
 </RCC>

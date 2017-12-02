@@ -24,7 +24,8 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.warn(JSON.stringify(music.artists));
+                    console.log(JSON.stringify(music.nowPlaying))
+                    appStack.push("../Apps/Music/NowPlaying.qml")
                 }
             }
         }

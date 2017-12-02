@@ -14,14 +14,6 @@ ApplicationWindow {
     height: 480
     title: qsTr("CarPC")
 
-//    SystemVolume {
-//        id: systemVolume
-//    }
-
-//    Music {
-//        id: music
-//    }
-
     Header {
         id: appHeader
         height: 30

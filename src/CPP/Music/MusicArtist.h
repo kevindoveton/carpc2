@@ -5,16 +5,16 @@
 #include <QUrl>
 class MusicArtist : public QObject {
     Q_OBJECT
-    Q_PROPERTY(unsigned int id READ getId NOTIFY idChanged)
-    Q_PROPERTY(QString name READ getName NOTIFY nameChanged)
-    Q_PROPERTY(QUrl image READ getImage NOTIFY imageChanged)
+    Q_PROPERTY(unsigned int id READ id NOTIFY idChanged)
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+    Q_PROPERTY(QUrl image READ image NOTIFY imageChanged)
 
 public:
     explicit MusicArtist(unsigned int id, QString name, QString image, QObject *parent = nullptr);
 
-    unsigned int getId() { return _id; }
-    QString getName() { return _name; }
-    QUrl getImage() { return _image; }
+    unsigned int id() { return _id; }
+    QString name() { return _name; }
+    QUrl image() { return _image; }
 
 signals:
     void nameChanged();
