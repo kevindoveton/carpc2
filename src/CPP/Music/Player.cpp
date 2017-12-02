@@ -3,6 +3,8 @@
 Player::Player(QObject *parent) : QObject(parent) {
   _playing = false;
   _vlcInstance = libvlc_new(0, NULL);
+  _vlcPlayer = NULL;
+  _vlcMedia = NULL;
   return;
 }
 
@@ -19,10 +21,18 @@ bool Player :: playPause(bool play) {
     return _playing;
   }
 
+  if (_vlcPlayer == NULL) {
+    return false;
+  }
+
   if (play == true) {
     libvlc_media_player_play(_vlcPlayer);
   } else {
-    libvlc_media_player_stop(_vlcPlayer);
+    if (libvlc_media_player_can_pause(_vlcPlayer)) {
+      libvlc_media_player_pause(_vlcPlayer);
+    } else {
+      libvlc_media_player_stop(_vlcPlayer);
+    }
   }
 
   _playing = play;
@@ -30,12 +40,19 @@ bool Player :: playPause(bool play) {
   return _playing;
 }
 
+bool Player :: playPause() {
+  return playPause(!_playing);
+}
+
 void Player :: setSongPath(QString songPath) {
   if (_songPath == songPath) {
+    qDebug() << "AHHH";
+    play();
     return;
   }
 
-  pause();
+  if (_playing)
+    pause();
 
   _songPath = songPath;
   qDebug() << _songPath;

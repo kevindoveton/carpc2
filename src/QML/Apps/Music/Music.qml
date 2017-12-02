@@ -13,14 +13,14 @@ Item {
         Item {
             id: musicPlaylist
             Rectangle {
-                color: 'white   '
+                color: config.bgColor
                 anchors.fill: parent
             }
         }
         Item {
             id: musicArtist
             Rectangle {
-                color: 'white'
+                color: config.bgColor
                 anchors.fill: parent
                 GridView {
                     cellWidth: parent.width /3
@@ -38,7 +38,7 @@ Item {
         Item {
             id: musicAlbum
             Rectangle {
-                color: 'white'
+                color: config.bgColor
                 anchors.fill: parent
                 GridView {
                     cellWidth: parent.width /3
@@ -54,7 +54,7 @@ Item {
         Item {
             id: musicSong
             Rectangle {
-                color: 'white'
+                color: config.bgColor
                 anchors.fill: parent
                 ListView {
                     anchors.fill: parent

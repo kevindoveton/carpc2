@@ -217,9 +217,13 @@ QObject* Music :: getSongById(unsigned int id) {
 }
 
 void Music :: updateNowPlaying() {
-  delete(_nowPlayingArtist);
-  delete(_nowPlayingAlbum);
-  delete(_nowPlayingSong);
+  if (_nowPlayingArtist != NULL)
+    delete(_nowPlayingArtist);
+  if (_nowPlayingAlbum != NULL)
+    delete(_nowPlayingAlbum);
+  if (_nowPlayingSong != NULL)
+    delete(_nowPlayingSong);
+
   _nowPlayingArtist = getArtistById(_currentArtist);
   _nowPlayingAlbum = getAlbumById(_currentAlbum);
   _nowPlayingSong = getSongById(_currentSong);

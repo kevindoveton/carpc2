@@ -8,7 +8,9 @@ SOURCES += src/main.cpp \
     src/CPP/Music/Player.cpp \
     src/CPP/Music/MusicArtist.cpp \
     src/CPP/SystemVolume/SystemVolume.cpp \
-    src/CPP/Music/MusicSong.cpp
+    src/CPP/Music/MusicSong.cpp \
+    src/CPP/Utilities/Config.cpp \
+    src/CPP/Utilities/Time.cpp
 RESOURCES += \
     resources/resources.qrc \
     src/QML/qml.qrc
@@ -59,7 +61,6 @@ DISTFILES += \
     src/QML/Apps/Phone/Phone.qml \
     src/QML/Menu/Header.qml \
     src/QML/Menu/MainMenu.qml \
-    src/QML/Menu/MenuModel.qml \
     src/QML/Utilities/Sidebar.qml \
     src/QML/Utilities/VerticalLine.qml \
     src/QML/main.qml \
@@ -67,7 +68,9 @@ DISTFILES += \
     src/QML/Apps/Music/MusicArtistComponent.qml \
     src/QML/Apps/Music/MusicAlbumComponent.qml \
     src/QML/Apps/Music/MusicSongComponent.qml \
-    src/QML/Apps/Music/NowPlaying.qml
+    src/QML/Apps/Music/NowPlaying.qml \
+    src/QML/Apps/Music/MusicControlBar.qml \
+    src/QML/Apps/Maps/MapHeader.qml
 
 HEADERS += \
     src/CPP/Music/MusicAlbum.h \
@@ -75,7 +78,9 @@ HEADERS += \
     src/CPP/Music/MusicArtist.h \
     src/CPP/Music/Player.h \
     src/CPP/SystemVolume/SystemVolume.h \
-    src/CPP/Music/MusicSong.h
+    src/CPP/Music/MusicSong.h \
+    src/CPP/Utilities/Config.h \
+    src/CPP/Utilities/Time.h
 
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += alsa

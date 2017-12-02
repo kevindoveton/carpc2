@@ -13,5 +13,7 @@
         <file>Apps/Music/MusicAlbumComponent.qml</file>
         <file>Apps/Music/MusicArtistComponent.qml</file>
         <file>Apps/Music/NowPlaying.qml</file>
+        <file>Apps/Music/MusicControlBar.qml</file>
+        <file>Apps/Maps/MapHeader.qml</file>
     </qresource>
 </RCC>

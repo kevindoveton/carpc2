@@ -6,6 +6,8 @@
 
 #include <unistd.h>
 
+#include "CPP/Utilities/Config.h"
+#include "CPP/Utilities/Time.h"
 #include "CPP/SystemVolume/SystemVolume.h"
 #include "CPP/Music/Music.h"
 #include "CPP/Music/Player.h"
@@ -18,8 +20,10 @@ int main(int argc, char *argv[]) {
     QObject::connect(&engine, SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit    ()));
 
 
-    qputenv("MAPBOX_ACCESS_TOKEN", "pk.eyJ1Ijoia2V2aW5kb3ZldG9uIiwiYSI6ImNpdGdsYm9zYTAxMmcydG1rMnhuMGkxbHkifQ.pfUpUrZVbxkcj_pDx4Pbeg");
+//    qputenv("MAPBOX_ACCESS_TOKEN", "pk.eyJ1Ijoia2V2aW5kb3ZldG9uIiwiYSI6ImNpdGdsYm9zYTAxMmcydG1rMnhuMGkxbHkifQ.pfUpUrZVbxkcj_pDx4Pbeg");
 
+    context->setContextProperty("config", new Config);
+    context->setContextProperty("time", new Time);
     context->setContextProperty("systemVolume", new SystemVolume);
     context->setContextProperty("music", new Music);
     context->setContextProperty("player", new Player);
@@ -33,6 +37,4 @@ int main(int argc, char *argv[]) {
     delete topLevel;
     delete context;
     return rc;
-
-//	return app.exec();
 }

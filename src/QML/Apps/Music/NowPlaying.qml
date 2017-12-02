@@ -7,7 +7,7 @@ Item {
     property var song: music.nowPlayingSong
 
     Rectangle {
-        color: '#285982'
+        color: config.bgColor
         anchors.fill: parent
 
         Image {
@@ -62,6 +62,11 @@ Item {
             id: nowPlaying_albumText
             color: 'white'
             text: album.name
+        }
+
+        MusicControlBar {
+            width: parent.width
+            anchors.bottom: parent.bottom
         }
     }
 }

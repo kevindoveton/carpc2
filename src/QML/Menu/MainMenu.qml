@@ -43,10 +43,19 @@ Rectangle {
         Item {
             width: GridView.view.cellWidth
             height: GridView.view.cellHeight
+//            Rectangle {
+//                color: 'green'
+//                width: parent.width
+//                height: parent.height
+//            }
+
             Rectangle {
                 anchors.centerIn: parent
-                width: 120
-                height: 120
+                width: 140
+                height: 130
+                color: 'transparent'
+//                color: config.bgColor
+//                color: 'red'
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
@@ -65,20 +74,36 @@ Rectangle {
                     }
                 }
 
+                Rectangle {
+                    x: parent.width * 0.15
+                    y: 105
+                    color: 'white'
+                    opacity: 0.2
+                    height: 1
+                    width: parent.width * 0.7
+                }
+
+
                 Text {
                     y: 110
                     width: parent.width
                     horizontalAlignment: Text.AlignHCenter
                     text: name
+                    color: 'white'
+                    font.capitalization: Font.AllUppercase
                 }
             }
         }
     }
 
     GridView {
+        x: 0
+        y: parent.height * 0.15
+        width: parent.width
+        height: parent.height * 0.7
+
         cellWidth: parent.width /3
-        cellHeight: parent.height /3
-        anchors.fill: parent
+        cellHeight: height / 2
         model: menuModel
         delegate: menuDelegate
         interactive: false

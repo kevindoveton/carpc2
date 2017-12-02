@@ -17,6 +17,7 @@ class Player : public QObject {
     Q_INVOKABLE bool play();
     Q_INVOKABLE bool pause();
     Q_INVOKABLE bool playPause(bool play);
+    Q_INVOKABLE bool playPause();
 
     bool playing() { return _playing; }
     QString songPath() { return _songPath; }
