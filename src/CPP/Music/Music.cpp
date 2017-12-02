@@ -139,52 +139,90 @@ QObject* Music :: getCurrentSong() {
 }
 
 QObject* Music :: getArtistById(unsigned int id) {
-  if (_currentArtist == NULL) {
-    qDebug() << "Music :: getArtistById"
-             << "unable to return artist, none selected";
-    return NULL;
-  }
+  QSqlQuery query;
+  query.prepare("SELECT * FROM artists \
+                 WHERE artistId = (:artistId)");
+  query.bindValue(":artistId", id);
 
-  for (int i = 0; i < _artists.count(); i++) {
-    MusicArtist* n = dynamic_cast<MusicArtist*>(_artists[i]);
-    if (n->id() == id) return _artists[i];
+  if (query.exec()) {
+    int idName = query.record().indexOf("artistName");
+    int idArtistId = query.record().indexOf("artistId");
+    int idImagePath = query.record().indexOf("artistImagePath");
+    if (query.next()) {
+      int id = query.value(idArtistId).toInt();
+      QString name = query.value(idName).toString();
+      QString imagePath = query.value(idImagePath).toString();
+      return new MusicArtist(id, name, imagePath);
+    }
   }
 
   return NULL;
 }
 
 QObject* Music :: getAlbumById(unsigned int id) {
-  if (_currentAlbum == NULL) {
-    qDebug() << "Music :: getAlbumById"
-             << "unable to return artist, none selected";
-    return NULL;
-  }
-
-  for (int i = 0; i < _albums.count(); i++) {
-    MusicAlbum* n = dynamic_cast<MusicAlbum*>(_albums[i]);
-    if (n->id() == id) return _albums[i];
+  QSqlQuery query;
+  query.prepare("SELECT * FROM albums WHERE albumId = (:albumId)");
+  query.bindValue(":albumId", id);
+  if (query.exec()) {
+    int idAlbumId = query.record().indexOf("albumId");
+    int idName = query.record().indexOf("albumName");
+    int idGenre = query.record().indexOf("albumName");
+    int idYear = query.record().indexOf("albumName");
+    int idImagePath = query.record().indexOf("albumImagePath");
+    int idArtistId = query.record().indexOf("artistId");
+    if (query.next()) {
+      unsigned int id = query.value(idAlbumId).toInt();
+      QString name = query.value(idName).toString();
+      QString genre = query.value(idGenre).toString();
+      unsigned int year = query.value(idYear).toInt();
+      QString imagePath = query.value(idImagePath).toString();
+      int artistId = query.value(idArtistId).toInt();
+      return new MusicAlbum(id, name, genre, year, imagePath, artistId);
+    }
+  } else {
+    qWarning() << "Music :: setCurrentArtist()"
+               << "Failed to exec query, " << query.lastError();
   }
 
   return NULL;
 }
 
 QObject* Music :: getSongById(unsigned int id) {
-  if (_currentSong == NULL) {
-    qDebug() << "Music :: getSongById"
-             << "unable to return artist, none selected";
-    return NULL;
-  }
+   QSqlQuery query;
+   query.prepare("SELECT * from songs as s \
+                 INNER JOIN library as l on s.songId = l.songID \
+                 where s.songId = (:songId)");
+   query.bindValue(":songId", id);
 
-  for (int i = 0; i < _songs.count(); i++) {
-    MusicSong* n = dynamic_cast<MusicSong*>(_songs[i]);
-    if (n->id() == id) return _songs[i];
-  }
+   if (query.exec()) {
+     int idSongId = query.record().indexOf("songId");;
+     int idName = query.record().indexOf("songName");
+     int idPath = query.record().indexOf("path");;
+     int idAlbumId = query.record().indexOf("albumId");
+ //    int idArtistId = query.record().indexOf("artistId");
+     while (query.next()) {
+       unsigned int id = query.value(idSongId).toInt();
+       QString name = query.value(idName).toString();
+       QString path = query.value(idPath).toString();
+       unsigned int albumId = query.value(idAlbumId).toInt();
+ //      unsigned int artistId = query.value(idArtistId).toInt();
+       return new MusicSong(id, name, path, albumId, 0);
+     }
+   } else {
+     qWarning() << "Music :: setCurrentAlbum()"
+                << "Failed to exec query," << query.lastError();
+   }
 
   return NULL;
 }
 
 void Music :: updateNowPlaying() {
-
+  delete(_nowPlayingArtist);
+  delete(_nowPlayingAlbum);
+  delete(_nowPlayingSong);
+  _nowPlayingArtist = getArtistById(_currentArtist);
+  _nowPlayingAlbum = getAlbumById(_currentAlbum);
+  _nowPlayingSong = getSongById(_currentSong);
   emit nowPlayingChanged();
   return;
 }

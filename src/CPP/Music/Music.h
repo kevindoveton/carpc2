@@ -26,7 +26,9 @@ class Music : public QObject
     Q_PROPERTY(QList<QObject*> albums READ albums NOTIFY albumsChanged)
     Q_PROPERTY(QList<QObject*> songs READ songs NOTIFY songsChanged)
 
-//    Q_PROPERTY(QObject nowPlayingArtist READ nowPlayingArtist WRITE setNowPlayingArtist NOTIFY nowPlayingArtistChanged)
+    Q_PROPERTY(QObject* nowPlayingArtist READ nowPlayingArtist NOTIFY nowPlayingChanged)
+    Q_PROPERTY(QObject* nowPlayingAlbum READ nowPlayingAlbum NOTIFY nowPlayingChanged)
+    Q_PROPERTY(QObject* nowPlayingSong READ nowPlayingSong NOTIFY nowPlayingChanged)
 
 
 
@@ -53,9 +55,9 @@ public:
     void setCurrentAlbum(unsigned int albumId);
     void setCurrentSong(unsigned int songId);
 
-//    QObject nowPlayingArtist() { return _nowPlayingArtist; }
-//    QObject nowPlayingAlbum() { return _nowPlayingAlbum; }
-//    QObject nowPlayingSong() { return _nowPlayingSong; }
+    QObject* nowPlayingArtist() { return _nowPlayingArtist; }
+    QObject* nowPlayingAlbum() { return _nowPlayingAlbum; }
+    QObject* nowPlayingSong() { return _nowPlayingSong; }
 
 
 protected:
@@ -74,7 +76,9 @@ protected:
 
     QHash<QString, QObject*> _nowPlaying;
 
-    QObject _nowPlayingArtist;
+    QObject* _nowPlayingArtist;
+    QObject* _nowPlayingAlbum;
+    QObject* _nowPlayingSong;
 
 signals:
     void currentArtistChanged();

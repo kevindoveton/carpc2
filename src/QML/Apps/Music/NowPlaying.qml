@@ -2,9 +2,9 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Item {
-    property var album: music.nowPlaying.album
-    property var artist: music.nowPlaying.artist
-    property var song: music.nowPlaying.song
+    property var album: music.nowPlayingAlbum
+    property var artist: music.nowPlayingArtist
+    property var song: music.nowPlayingSong
 
     Rectangle {
         color: '#285982'
